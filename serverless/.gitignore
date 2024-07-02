@@ -1,0 +1,40 @@
+# npm
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+package-lock.json
+node_modules
+dist
+dist-ssr
+coverage
+*.local
+.env
+.yarn
+.vercel
+.now
+
+# Python
+.venv
+.python-version
+__pycache__
+requirements-tmp*
+
+# serverless
+/.serverless
+/.serverless-wsgi
+/serverless_wsgi.py
+/wsgi_handler.py
+/.dynamodb
+/config/stages/*
+/config/templates/*
+
+/develop/env.sh
+/develop/var/*
+/develop/fixtures/*
+/develop/memo.txt

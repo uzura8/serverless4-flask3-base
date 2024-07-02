@@ -1,0 +1,22 @@
+Type: "AWS::DynamoDB::Table"
+Properties:
+  TableName: ${self:custom.prjPrefix}-admin-user-config
+  AttributeDefinitions:
+    - AttributeName: adminUserId
+      AttributeType: S
+    - AttributeName: configName
+      AttributeType: S
+  KeySchema:
+    - AttributeName: adminUserId
+      KeyType: HASH
+    - AttributeName: configName
+      KeyType: RANGE
+
+  BillingMode: ${self:custom.dynamodbConfig.adminUserConfig.billingMode, 'PAY_PER_REQUEST'}
+  ProvisionedThroughput:
+    ReadCapacityUnits: ${self:custom.dynamodbConfig.adminUserConfig.provisionedThroughput.readCapacityUnits, 0}
+    WriteCapacityUnits: ${self:custom.dynamodbConfig.adminUserConfig.provisionedThroughput.writeCapacityUnits, 0}
+
+  Tags:
+    - Key: backup
+      Value: ${self:custom.dynamoDbBackupTargetTagValue}

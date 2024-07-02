@@ -1,0 +1,43 @@
+# OS file
+*~
+*.bak
+.DS_Store
+Thumbs.db
+
+# temp files for editor
+*.swp
+*.swo
+*.swn
+*.bak
+*.orig
+*.tmp
+
+# IDE user config
+.vscode/
+!.vscode/extensions.json
+*.code-workspace
+.idea/
+.vs/
+.buildpath
+.project
+.settings
+desktop.ini
+nbproject/
+*.iml
+*.suo
+*.sln
+*.user
+*.userosscache
+*.cache
+*.svclog
+*.dbmdl
+*.jfm
+*.tmproj
+*.local
+*.ntvs*
+*.njsproj
+*.sw?
+tags
+
+# For this project
+/public

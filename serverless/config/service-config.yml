@@ -1,0 +1,5 @@
+default:
+  user:
+    userType: "normal"
+    tier: "free"
+    regionSlug: "japan"
