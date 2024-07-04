@@ -1,0 +1,22 @@
+# General
+prj_prefix = "your-project"
+environment = "dev" # prd / dev
+
+region_api      = "ap-northeast-1"
+region_site     = "ap-northeast-1"
+region_acm      = "us-east-1"
+route53_zone_id = "Set your route53 zone id"
+
+domain_api  = "your-domain-api.example.com"
+domain_static_site = "your-domain.example.com"
+domain_media_site = "your-domain-media.example.com"
+#domain_api  = "your-domain-api-dev.example.com"
+#domain_static_site = "your-domain-dev.example.com"
+#domain_media_site = "your-domain-media-dev.example.com"
+
+## VPC
+#vpc_availability_zones = ["ap-northeast-1c", "ap-northeast-1d"]
+#
+## APP Deploy
+#app_is_enabled = 1
+

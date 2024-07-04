@@ -37,13 +37,13 @@
     - ses:SendEmail
     - ses:SendRawEmail
   Resource: "*"
-- Effect: Allow
-  Action:
-    - cognito-idp:ListUsers
-    - cognito-idp:AdminGetUser
-    - cognito-idp:AdminCreateUser
-    - cognito-idp:AdminUpdateUserAttributes
-    - cognito-idp:AddCustomAttributes
-    - cognito-idp:AdminDeleteUser
-    - cognito-idp:AdminDeleteUserAttributes
-  Resource: arn:aws:cognito-idp:${self:custom.cognitoRegion}:${self:custom.awsAccontId}:userpool/${self:custom.cognitoUserpoolId}
+#- Effect: Allow
+#  Action:
+#    - cognito-idp:ListUsers
+#    - cognito-idp:AdminGetUser
+#    - cognito-idp:AdminCreateUser
+#    - cognito-idp:AdminUpdateUserAttributes
+#    - cognito-idp:AddCustomAttributes
+#    - cognito-idp:AdminDeleteUser
+#    - cognito-idp:AdminDeleteUserAttributes
+#  Resource: arn:aws:cognito-idp:${self:custom.cognitoRegion}:${self:custom.awsAccontId}:userpool/${self:custom.cognitoUserpoolId}

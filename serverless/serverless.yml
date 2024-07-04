@@ -19,8 +19,8 @@ custom:
   dynamoDbBackupTargetTagValue: ${file(${self:custom.stageConfigFileName}):dynamoDbBackupTargetTagValue}
   mediaS3BucketName: ${file(${self:custom.stageConfigFileName}):media.s3BucketName}
   awsAccontId: ${file(./config/stages/common.yml):awsAccountId}
-  cognitoRegion: ${file(${self:custom.stageConfigFileName}):cognito.region}
-  cognitoUserpoolId: ${file(${self:custom.stageConfigFileName}):cognito.userpoolId}
+  # cognitoRegion: ${file(${self:custom.stageConfigFileName}):cognito.region}
+  # cognitoUserpoolId: ${file(${self:custom.stageConfigFileName}):cognito.userpoolId}
   dynamodbConfig: ${file(${self:custom.stageConfigFileName}):dynamodbConfig}
 
   flaskEnv:
@@ -128,12 +128,12 @@ provider:
     CORS_ACCEPT_ORIGINS: ${file(${self:custom.stageConfigFileName}):corsAcceptOrigins}
     LOG_LEVEL: ${file(${self:custom.stageConfigFileName}):logLevel}
     MEDIA_S3_BUCKET_NAME: ${self:custom.mediaS3BucketName}
-    COGNITO_REGION: ${self:custom.cognitoRegion}
-    COGNITO_USERPOOL_ID: ${self:custom.cognitoUserpoolId}
-    COGNITO_APP_CLIENT_ID: ${file(${self:custom.stageConfigFileName}):cognito.appClientId}
-    COGNITO_CHECK_TOKEN_EXPIRATION: ${file(${self:custom.stageConfigFileName}):cognito.checkTokenExpiration}
-    COGNITO_JWT_HEADER_NAME: ${file(./config/stages/common.yml):cognito.jwtHeaderName}
-    COGNITO_JWT_HEADER_PREFIX: ${file(./config/stages/common.yml):cognito.jwtHeaderPrefix}
+    # COGNITO_REGION: ${self:custom.cognitoRegion}
+    # COGNITO_USERPOOL_ID: ${self:custom.cognitoUserpoolId}
+    # COGNITO_APP_CLIENT_ID: ${file(${self:custom.stageConfigFileName}):cognito.appClientId}
+    # COGNITO_CHECK_TOKEN_EXPIRATION: ${file(${self:custom.stageConfigFileName}):cognito.checkTokenExpiration}
+    # COGNITO_JWT_HEADER_NAME: ${file(./config/stages/common.yml):cognito.jwtHeaderName}
+    # COGNITO_JWT_HEADER_PREFIX: ${file(./config/stages/common.yml):cognito.jwtHeaderPrefix}
 
 package:
   patterns:

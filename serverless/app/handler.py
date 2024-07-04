@@ -1,7 +1,7 @@
 import os
 import logging
 from flask import Flask, jsonify, request
-from flask_cognito import CognitoAuth
+# from flask_cognito import CognitoAuth
 from werkzeug.routing import Rule
 from app.utils.error import InvalidUsage
 from app.utils.custom_json_provider import CustomJsonProvider
@@ -43,15 +43,15 @@ jinja_options.update({
 })
 app.jinja_options = jinja_options
 
-app.config.update({
-    'COGNITO_REGION': os.environ.get('COGNITO_REGION', ''),
-    'COGNITO_USERPOOL_ID': os.environ.get('COGNITO_USERPOOL_ID', ''),
-    'COGNITO_APP_CLIENT_ID': os.environ.get('COGNITO_APP_CLIENT_ID', ''),
-    'COGNITO_CHECK_TOKEN_EXPIRATION': os.environ.get('COGNITO_CHECK_TOKEN_EXPIRATION', True),
-    'COGNITO_JWT_HEADER_NAME': os.environ.get('COGNITO_JWT_HEADER_NAME', 'Authorization'),
-    'COGNITO_JWT_HEADER_PREFIX': os.environ.get('COGNITO_JWT_HEADER_PREFIX', 'Bearer'),
-})
-cogauth = CognitoAuth(app)
+# app.config.update({
+#     'COGNITO_REGION': os.environ.get('COGNITO_REGION', ''),
+#     'COGNITO_USERPOOL_ID': os.environ.get('COGNITO_USERPOOL_ID', ''),
+#     'COGNITO_APP_CLIENT_ID': os.environ.get('COGNITO_APP_CLIENT_ID', ''),
+#     'COGNITO_CHECK_TOKEN_EXPIRATION': os.environ.get('COGNITO_CHECK_TOKEN_EXPIRATION', True),
+#     'COGNITO_JWT_HEADER_NAME': os.environ.get('COGNITO_JWT_HEADER_NAME', 'Authorization'),
+#     'COGNITO_JWT_HEADER_PREFIX': os.environ.get('COGNITO_JWT_HEADER_PREFIX', 'Bearer'),
+# })
+# cogauth = CognitoAuth(app)
 
 # get prefix from environment variable
 APP_ROOT = os.getenv('APP_ROOT')

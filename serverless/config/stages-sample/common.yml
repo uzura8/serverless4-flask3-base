@@ -2,9 +2,9 @@ service: "your-project"
 awsAccountId: "Your-AWS-Acconnt-ID"
 defaultRegion: "ap-northeast-1"
 deploymentBucketName: "your-deployment"
-cognito:
-  jwtHeaderName: "Authorization"
-  jwtHeaderPrefix: "Bearer"
+#cognito:
+#  jwtHeaderName: "Authorization"
+#  jwtHeaderPrefix: "Bearer"
 
 appCommonSettings:
   memorySize: 128 # MB
