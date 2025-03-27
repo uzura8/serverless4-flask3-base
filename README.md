@@ -14,40 +14,19 @@ Constructed by
 You need below
 
 - common
-  - aws-cli >= 1.32.X
-  - Terraform >= 1.9.1
+  - aws-cli >= 2.22.X
+  - Terraform >= 1.10.4
 - serverless
-  - nodeJS >= 22.3.X
+  - nodeJS >= 22.12.X
   - Python >= 3.12.X
 
-#### Install tools
-
-Install serverless, python venv and terraform on mac
+### Install Packages
 
 ```bash
 # At project root dir
 cd (project_root/)serverless
 npm install
 python -m venv .venv
-
-brew install tfenv
-tfenv install 1.8.5
-tfenv use 1.8.5
-```
-
-### Install Packages
-
-Install npm packages
-
-```bash
-# At project root dir
-cd (project_root/)serverless
-npm install
-```
-
-Install python packages
-
-```bash
 . .venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -94,66 +73,8 @@ terraform init -backend-config="bucket=your-deployment" -backend-config="key=ter
 #### 4. Execute terraform apply
 
 ```bash
-terraform apply -auto-approve -var-file=./terraform.tfvars
+terraform apply
 ```
-
-#### 5. Set CORS of media file bucket
-
-- Access to S3 console of media file bucket
-- Select tab "Permission"
-- Press "Edit" button of "Cross-origin resource sharing (CORS)"
-- Set bellow
-
-```
-[
-    {
-        "AllowedHeaders": [
-            "*"
-        ],
-        "AllowedMethods": [
-            "PUT",
-            "POST",
-            "DELETE",
-            "GET"
-        ],
-        "AllowedOrigins": [
-            "https://your-domain.example.com"
-        ],
-        "ExposeHeaders": []
-    }
-]
-```
-
-## DynamoDB Backup Settings
-
-If you want to backup DynamoDB items, set bellows
-
-- Access to "AWS Backup" on AWS Console and set region
-- Press "Create backup plan"
-- Input as follows for "Plan"
-  - Start options
-    - Select "Build a new plan"
-    - Backup plan name: your-project-dynamodb-backup
-  - Backup rule configuration
-    - Backup vault: Default
-    - Backup rule name: your-project-dynamodb-backup-rule
-    - Backup frequency: Daily
-    - Backup window: Customize backup window
-    - Backup window settings: as you like
-  - Press "Create backup plan"
-- Input as follows for "Assign resources"
-  - General
-    - Resource assignment name: your-project-dynamodb-backup-assignment
-    - IAM role: Default role
-  - Resource selection
-    - 1. Define resource selection: Include specific resource types
-    - 2. Select specific resource types: DynamoDB
-      - Table names: All tables
-    - 4. Refine selection using tags
-      - Key: backup
-      - Condition for value: Eauqls
-      - Value: aws-backup
-  - Press "Assign resources"
 
 ## Deploy Server Side Resources
 
@@ -239,6 +160,37 @@ vi src/config/config.json
 #### Upload S3 Bucket "your-serverless-configs/your-project-name/frontend/{stage}"
 
 #### Deploy continually on pushed to git
+
+## DynamoDB Backup Settings (optional)
+
+If you want to backup DynamoDB items, set bellows
+
+- Access to "AWS Backup" on AWS Console and set region
+- Press "Create backup plan"
+- Input as follows for "Plan"
+  - Start options
+    - Select "Build a new plan"
+    - Backup plan name: your-project-dynamodb-backup
+  - Backup rule configuration
+    - Backup vault: Default
+    - Backup rule name: your-project-dynamodb-backup-rule
+    - Backup frequency: Daily
+    - Backup window: Customize backup window
+    - Backup window settings: as you like
+  - Press "Create backup plan"
+- Input as follows for "Assign resources"
+  - General
+    - Resource assignment name: your-project-dynamodb-backup-assignment
+    - IAM role: Default role
+  - Resource selection
+    - 1. Define resource selection: Include specific resource types
+    - 2. Select specific resource types: DynamoDB
+      - Table names: All tables
+    - 4. Refine selection using tags
+      - Key: backup
+      - Condition for value: Eauqls
+      - Value: aws-backup
+  - Press "Assign resources"
 
 ## Development
 
