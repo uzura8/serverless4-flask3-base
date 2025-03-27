@@ -1,21 +1,18 @@
 variable "prj_prefix" {}
-variable "environment" {}
-
 variable "region_api" {}
-variable "region_site" {}
 variable "region_acm" {}
-
 variable "route53_zone_id" {}
 variable "domain_api" {}
-variable "domain_static_site" {}
-variable "domain_media_site" {}
-
-#variable "vpc_availability_zones" {}
-#variable "app_is_enabled" {}
 
 
 provider "aws" {
   region = var.region_api
+  alias  = "api"
+}
+
+provider "aws" {
+  region = var.region_acm
+  alias  = "acm"
 }
 
 terraform {
@@ -29,30 +26,57 @@ terraform {
   }
 }
 
-# Route53 and ACM
-module "module_domain_api" {
-  source          = "./modules/aws/domain_api"
-  prj_prefix      = var.prj_prefix
-  route53_zone_id = var.route53_zone_id
-  domain_api      = var.domain_api
-  region_api      = var.region_api
-  region_acm      = var.region_acm
+locals {
+  fqdn = {
+    api = var.domain_api
+  }
 }
 
-module "module_static_site" {
-  source             = "./modules/aws/static_site"
-  prj_prefix         = var.prj_prefix
-  route53_zone_id    = var.route53_zone_id
-  domain_static_site = var.domain_static_site
-  domain_media_site  = var.domain_media_site
-  region_site        = var.region_site
-  region_acm         = var.region_acm
-}
-
-## VPC
-#module "module_vpc" {
-#  source             = "./modules/aws/vpc"
-#  availability_zones = var.vpc_availability_zones
-#  prj_prefix         = var.prj_prefix
+### S3 for cloudfront logs
+#resource "aws_s3_bucket" "accesslog_static_site" {
+#  provider      = aws.site
+#  bucket        = "${local.fqdn.static_site}-accesslog"
+#  force_destroy = true # Set true, destroy bucket with objects
+#  acl           = "log-delivery-write"
+#
+#  tags = {
+#    Name      = join("-", [var.prj_prefix, "s3", "accesslog_static_site"])
+#    ManagedBy = "terraform"
+#  }
 #}
 
+
+resource "aws_acm_certificate" "api" {
+  provider          = aws.api
+  domain_name       = local.fqdn.api
+  validation_method = "DNS"
+
+  tags = {
+    Name      = join("-", [var.prj_prefix, "acm"])
+    ManagedBy = "terraform"
+  }
+}
+
+# CNAME Record
+resource "aws_route53_record" "api_acm_c" {
+  for_each = {
+    for d in aws_acm_certificate.api.domain_validation_options : d.domain_name => {
+      name   = d.resource_record_name
+      record = d.resource_record_value
+      type   = d.resource_record_type
+    }
+  }
+  zone_id         = var.route53_zone_id
+  name            = each.value.name
+  type            = each.value.type
+  ttl             = 172800
+  records         = [each.value.record]
+  allow_overwrite = true
+}
+
+## Related ACM Certification and CNAME record
+resource "aws_acm_certificate_validation" "api" {
+  provider                = aws.api
+  certificate_arn         = aws_acm_certificate.api.arn
+  validation_record_fqdns = [for record in aws_route53_record.api_acm_c : record.fqdn]
+}

@@ -17,7 +17,7 @@ custom:
   prjPrefix: ${self:service}-${self:provider.stage}
   stageConfigFileName: ./config/stages/${self:provider.stage}.yml
   dynamoDbBackupTargetTagValue: ${file(${self:custom.stageConfigFileName}):dynamoDbBackupTargetTagValue}
-  mediaS3BucketName: ${file(${self:custom.stageConfigFileName}):media.s3BucketName}
+  #mediaS3BucketName: ${file(${self:custom.stageConfigFileName}):media.s3BucketName}
   awsAccontId: ${file(./config/stages/common.yml):awsAccountId}
   # cognitoRegion: ${file(${self:custom.stageConfigFileName}):cognito.region}
   # cognitoUserpoolId: ${file(${self:custom.stageConfigFileName}):cognito.userpoolId}
@@ -127,7 +127,7 @@ provider:
     FLASK_ENV: ${self:custom.flaskEnv.${self:provider.stage}, 'development'}
     CORS_ACCEPT_ORIGINS: ${file(${self:custom.stageConfigFileName}):corsAcceptOrigins}
     LOG_LEVEL: ${file(${self:custom.stageConfigFileName}):logLevel}
-    MEDIA_S3_BUCKET_NAME: ${self:custom.mediaS3BucketName}
+    # MEDIA_S3_BUCKET_NAME: ${self:custom.mediaS3BucketName}
     # COGNITO_REGION: ${self:custom.cognitoRegion}
     # COGNITO_USERPOOL_ID: ${self:custom.cognitoUserpoolId}
     # COGNITO_APP_CLIENT_ID: ${file(${self:custom.stageConfigFileName}):cognito.appClientId}
