@@ -9,7 +9,7 @@ Constructed by
 
 ## Instration
 
-#### Preparation
+### Preparation
 
 You need below
 
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 ## Deploy AWS Resources by Terraform
 
-#### Create AWS S3 Bucket for terraform state and frontend config
+### Create AWS S3 Bucket for terraform state and frontend config
 
 Create S3 Buckets like below in ap-northeast-1 region
 
@@ -183,10 +183,10 @@ If you want to backup DynamoDB items, set bellows
     - Resource assignment name: your-project-dynamodb-backup-assignment
     - IAM role: Default role
   - Resource selection
-    - 1. Define resource selection: Include specific resource types
-    - 2. Select specific resource types: DynamoDB
+    - Define resource selection: Include specific resource types
+    - Select specific resource types: DynamoDB
       - Table names: All tables
-    - 4. Refine selection using tags
+    - Refine selection using tags
       - Key: backup
       - Condition for value: Eauqls
       - Value: aws-backup
