@@ -1,6 +1,5 @@
 # General
-prj_prefix = "your-project"
-environment = "dev" # prd / dev
+prj_prefix = "your-project-dev"
 
 region_api      = "ap-northeast-1"
 region_acm      = "us-east-1"
